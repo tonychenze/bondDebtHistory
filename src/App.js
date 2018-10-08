@@ -18,8 +18,8 @@ class App extends Component {
           <Route path="/monitor" component={Monitor} />
           <Route path="/risktable" component={RiskTable} />
           <Route path="/not-found" component={NotFound} />
+          <Redirect from="/" exact to="/risktable" />
           <Redirect to="/not-found" />
-          <Redirect from="/" to="/risktable" />
         </Switch>
       </div>
     );
