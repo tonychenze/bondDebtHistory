@@ -17,9 +17,9 @@ class TableHeader extends Component {
   };
 
   render() {
-    const { columns } = this.props;
+    const { columns, headerStyle } = this.props;
     return (
-      <thead className="thead-dark">
+      <thead className={headerStyle}>
         <tr>
           {columns.map(column => (
             <th
@@ -37,7 +37,11 @@ class TableHeader extends Component {
 TableHeader.propTypes = {
   columns: PropTypes.array.isRequired,
   onSort: PropTypes.func,
-  sortColumn: PropTypes.object
+  sortColumn: PropTypes.object,
+  headerStyle: PropTypes.string
+};
+TableHeader.defaultProps = {
+  headerStyle: "thead-dark"
 };
 export default TableHeader;
 

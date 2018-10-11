@@ -10,6 +10,7 @@ class RiskTable extends Component {
     console.log("risktable sort item : ", currentSortColumn);
   };
   headers = [{ path: "1", label: "1" }, { path: "2", label: "2" }];
+  body= [{path:'1', _id:'1', }]
   render() {
     const { currentSortColumn } = this.state;
     return (
