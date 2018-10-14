@@ -4,9 +4,8 @@ import PropTypes from "prop-types";
 class TableHeader extends Component {
   raiseSort = path => {
     const { sortColumn, onSort } = this.props;
-    if (!onSort) return;
+    if (!onSort || !path) return;
     const newSort = { ...sortColumn };
-    if (!path) return;
     if (sortColumn.path === path) {
       newSort.order = sortColumn.order === "asc" ? "desc" : "asc";
     } else {
@@ -16,6 +15,15 @@ class TableHeader extends Component {
     onSort(newSort);
   };
 
+  renderOrderIcon = column => {
+    const { sortColumn } = this.props;
+    if (column.path !== sortColumn.path) return null;
+    return sortColumn.order === "asc" ? (
+      <i className="fa fa-sort-asc" aria-hidden="true" />
+    ) : (
+      <i className="fa fa-sort-desc" aria-hidden="true" />
+    );
+  };
   render() {
     const { columns, headerStyle } = this.props;
     return (
@@ -27,6 +35,7 @@ class TableHeader extends Component {
               key={column.path || column.key}
             >
               {column.label}
+              {this.renderOrderIcon(column)}
             </th>
           ))}
         </tr>
