@@ -1,3 +1,31 @@
 .fa {
   color: white;
 }
+/* utilisation column */
+#utilsationIcon {
+  color: #d9534f;
+}
+#utilisationValue {
+  margin-bottom: 0px;
+  padding: 4px;
+}
+
+.valueLabel {
+  font-size: 14px;
+  padding-right: 2px;
+  padding-left: 2px;
+  color: #7d7f83;
+}
+
+/* exposure column */
+.exposureValue {
+  font-size: 1.2em;
+  color: #d9534f;
+}
+
+/*limit column*/
+.limitValue {
+  font-size: 1.2em;
+  color: #f0ad4e;
+}
+

@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import { toast } from "react-toastify";
+import limitService from "../../services/limitService";
 import TableSortable from "../common/tableSortable";
+import Utilisation from "./utilisation";
+import FormattedValue from "./formattedValue";
+
 import "./riskTable.css";
 
 class RiskTable extends Component {
@@ -10,48 +14,32 @@ class RiskTable extends Component {
     rows: []
   };
 
-  componentDidMount() {
-    this.setState({
-      rows: [
-        {
-          _id: "1",
-          description: "description",
-          type: "VaR",
-          utilisation: 45,
-          exposure: 4.5,
-          limit: 10,
-          mrm: "MRM Onwer 1",
-          business: "business owner",
-          supervisor: "supervisor ",
-          tick: 0.5
-        },
-        {
-          _id: "2",
-          description: "eescription",
-          type: "PST",
-          utilisation: 35,
-          exposure: 7,
-          limit: 20,
-          mrm: "MRM Onwer 2",
-          business: "business owner 3",
-          supervisor: "supervisor 4 ",
-          tick: 1
-        }
-      ]
-    });
+  async componentDidMount() {
+    //get data from endpoint calling http service
+    const { data: rows } = await limitService.getLimits();
+    this.setState({ rows });
   }
-  handleSort = currentSortColumn => {
-    this.setState({ currentSortColumn });
-
-    //    console.log("risktable sort item : ", currentSortColumn);
-  };
 
   headers = [
     { path: "description", label: "Risk Description" },
     { path: "type", label: "Type" },
-    { path: "utilisation", label: "Utilisation %" },
-    { path: "exposure", label: "Exposure £ M" },
-    { path: "limit", label: "Limit Value" },
+    {
+      path: "utilisation",
+      label: "Utilisation",
+      content: item => (
+        <Utilisation utilisation={item.utilisation} breach={item.breach} />
+      )
+    },
+    {
+      path: "exposure",
+      label: "Exposure",
+      content: item => <FormattedValue item={item} path="exposure" />
+    },
+    {
+      path: "limit",
+      label: "Limit Value",
+      content: item => <FormattedValue item={item} path="limit" />
+    },
     { path: "mrm", label: "MRM Owner" },
     { path: "business", label: "Business Owner" },
     { path: "supervisor", label: "Supervisor" },
@@ -82,26 +70,39 @@ class RiskTable extends Component {
     }
   ];
 
+  handleSort = currentSortColumn => {
+    this.setState({ currentSortColumn });
+  };
+
   handleItemTick = (item, tickType) => {
     const rows = [...this.state.rows];
     const index = rows.indexOf(item);
     const newItem = rows[index];
+
+    const { description, exposure, tick, limit, breach } = item;
+
     if (tickType === "buy") {
-      newItem.exposure = item.exposure + item.tick;
-    } else {
-      if (item.exposure >= item.tick) {
-        newItem.exposure = item.exposure - item.tick;
+      if (exposure + tick <= (limit * breach) / 100) {
+        newItem.exposure = exposure + tick;
       } else {
-        toast.error("Reach the Limit");
+        toast.error(`${description} reach the Breach`);
+      }
+    } else {
+      if (exposure >= tick) {
+        newItem.exposure = exposure - tick;
+      } else {
+        toast.error(`The ${description} exposure is less than 0`);
       }
     }
-    newItem.utilisation = ((newItem.exposure * 100) / newItem.limit).toFixed(1);
+
+    newItem.utilisation = ((newItem.exposure * 100) / newItem.limit).toFixed(0);
     this.setState({ rows });
   };
 
   handleSellItem = item => {
     console.log("handle a sell of", item);
   };
+
   render() {
     const { currentSortColumn, rows } = this.state;
     const sortedRows = _.orderBy(
@@ -109,6 +110,7 @@ class RiskTable extends Component {
       [currentSortColumn.path],
       [currentSortColumn.order]
     );
+
     return (
       <div className="row">
         <div className="col-10 offset-1">
