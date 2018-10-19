@@ -5,7 +5,7 @@ import limitService from "../../services/limitService";
 import TableSortable from "../common/tableSortable";
 import Utilisation from "./utilisation";
 import FormattedValue from "./formattedValue";
-
+import RiskDashboard from "./riskDashboard";
 import "./riskTable.css";
 
 class RiskTable extends Component {
@@ -16,7 +16,39 @@ class RiskTable extends Component {
 
   async componentDidMount() {
     //get data from endpoint calling http service
-    const { data: rows } = await limitService.getLimits();
+    //const { data: rows } = await limitService.getLimits();
+    const rows = [
+      {
+        _id: "1",
+        description: "USD-GBP",
+        type: "FX",
+        utilisation: 100,
+        exposure: 10,
+        limit: 10,
+        mrm: "MRM Onwer 1",
+        business: "business owner",
+        supervisor: "supervisor ",
+        tick: 0.5,
+        breach: 1.2,
+        currency: "$",
+        unit: "M"
+      },
+      {
+        _id: "2",
+        description: "GBP-EUR",
+        type: "FX",
+        utilisation: 35,
+        exposure: 7,
+        limit: 20,
+        mrm: "MRM Onwer 2",
+        business: "business owner 3",
+        supervisor: "supervisor 4 ",
+        tick: 1,
+        breach: 1.5,
+        currency: "£",
+        unit: "M"
+      }
+    ];
     this.setState({ rows });
   }
 
@@ -43,7 +75,11 @@ class RiskTable extends Component {
     { path: "mrm", label: "MRM Owner" },
     { path: "business", label: "Business Owner" },
     { path: "supervisor", label: "Supervisor" },
-    { path: "tick", label: "Tick" },
+    {
+      path: "tick",
+      label: "Tick",
+      content: item => <FormattedValue item={item} path="tick" />
+    },
     {
       key: "buy",
       label: "",
@@ -82,7 +118,7 @@ class RiskTable extends Component {
     const { description, exposure, tick, limit, breach } = item;
 
     if (tickType === "buy") {
-      if (exposure + tick <= (limit * breach) / 100) {
+      if (exposure + tick <= limit * breach) {
         newItem.exposure = exposure + tick;
       } else {
         toast.error(`${description} reach the Breach`);
@@ -112,7 +148,11 @@ class RiskTable extends Component {
     );
 
     return (
-      <div className="row">
+      <div>
+        <div className="col-10 offset-1">
+          <RiskDashboard />
+        </div>
+
         <div className="col-10 offset-1">
           <TableSortable
             columns={this.headers}

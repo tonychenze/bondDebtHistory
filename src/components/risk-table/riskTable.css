@@ -1,5 +1,14 @@
+/*risk table*/
 .fa {
   color: white;
+}
+#tableName {
+  font-size: 2em;
+  color: #5bc0de;
+}
+.dashboard-count {
+  font-size: 2em;
+  padding-right: 6px;
 }
 /* utilisation column */
 #utilsationIcon {
@@ -28,4 +37,3 @@
   font-size: 1.2em;
   color: #f0ad4e;
 }
-
