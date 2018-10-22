@@ -1,5 +1,3 @@
 {
-  "apiURL": "https://my-json-server.typicode.com/tonychenze/fake_service",
-  "nearBreachRatio": "85",
-  "breachRatio": "95"
+  "apiURL": "https://my-json-server.typicode.com/tonychenze/fake_service"
 }

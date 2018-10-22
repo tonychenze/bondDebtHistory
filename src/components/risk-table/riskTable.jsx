@@ -22,8 +22,8 @@ class RiskTable extends Component {
         _id: "1",
         description: "USD-GBP",
         type: "FX",
-        utilisation: 100,
-        exposure: 10,
+        utilisation: 110,
+        exposure: 11,
         limit: 10,
         mrm: "MRM Onwer 1",
         business: "business owner",
@@ -53,7 +53,7 @@ class RiskTable extends Component {
   }
 
   headers = [
-    { path: "description", label: "Risk Description" },
+    { path: "description", label: "Description" },
     { path: "type", label: "Type" },
     {
       path: "utilisation",
@@ -74,7 +74,6 @@ class RiskTable extends Component {
     },
     { path: "mrm", label: "MRM Owner" },
     { path: "business", label: "Business Owner" },
-    { path: "supervisor", label: "Supervisor" },
     {
       path: "tick",
       label: "Tick",
@@ -121,7 +120,7 @@ class RiskTable extends Component {
       if (exposure + tick <= limit * breach) {
         newItem.exposure = exposure + tick;
       } else {
-        toast.error(`${description} reach the Breach`);
+        toast.error(`${description} reached the Breach`);
       }
     } else {
       if (exposure >= tick) {
@@ -150,7 +149,7 @@ class RiskTable extends Component {
     return (
       <div>
         <div className="col-10 offset-1">
-          <RiskDashboard />
+          <RiskDashboard data={rows} />
         </div>
 
         <div className="col-10 offset-1">

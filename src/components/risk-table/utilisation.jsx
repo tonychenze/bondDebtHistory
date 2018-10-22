@@ -1,5 +1,5 @@
 import React from "react";
-import { nearBreachRatio, breachRatio } from "../../config.json";
+import utils from "../utils";
 import "./riskTable.css";
 
 const Utilisation = ({ utilisation, breach }) => {
@@ -12,8 +12,8 @@ const Utilisation = ({ utilisation, breach }) => {
     />
   );
 
-  if (utilisation >= breachRatio * breach) utilClass += "danger";
-  else if (utilisation >= nearBreachRatio * breach) utilClass += "warning";
+  if (utils.isBreached(utilisation, breach)) utilClass += "danger";
+  else if (utils.isNearBreach(utilisation, breach)) utilClass += "warning";
   else {
     utilClass = "alert";
     icon = "";

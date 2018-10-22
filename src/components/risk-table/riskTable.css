@@ -1,18 +1,43 @@
+:root {
+  --bootstrap-info: #5bc0de;
+  --bootstrap-primary: #0275d8;
+  --bootstrap-success: #5cb85c;
+  --bootstrap-warning: #f0ad4e;
+  --bootstrap-danger: #d9534f;
+  --bootstrap-faded: #f7f7f7;
+  --bootstrap-inverse: #292b2c;
+}
 /*risk table*/
 .fa {
-  color: white;
+  color: var(--bootstrap-faded);
 }
+
+/*Dash board*/
 #tableName {
-  font-size: 2em;
-  color: #5bc0de;
+  font-size: 2.2em;
+  color: var(--bootstrap-info);
 }
 .dashboard-count {
-  font-size: 2em;
-  padding-right: 6px;
+  font-size: 2.2em;
+  font-weight: 600;
+  padding-right: 10px;
 }
+.dashboard-name {
+  font-size: 1.3em;
+}
+#dashboard-total {
+  color: var(--bootstrap-success);
+}
+#dashboard-nearBreach {
+  color: var(--bootstrap-warning);
+}
+#dashboard-breach {
+  color: var(--bootstrap-danger);
+}
+
 /* utilisation column */
 #utilsationIcon {
-  color: #d9534f;
+  color: var(--bootstrap-danger);
 }
 #utilisationValue {
   margin-bottom: 0px;
@@ -29,11 +54,11 @@
 /* exposure column */
 .exposureValue {
   font-size: 1.2em;
-  color: #d9534f;
+  color: var(--bootstrap-danger);
 }
 
 /*limit column*/
 .limitValue {
   font-size: 1.2em;
-  color: #f0ad4e;
+  color: var(--bootstrap-warning);
 }
