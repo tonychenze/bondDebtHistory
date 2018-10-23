@@ -1,10 +1,15 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "../common/form";
+import Utilisation from "./utilisation";
 import limitService from "../../services/limitService";
 class RiskEntryForm extends Form {
   state = {
-    data: {},
+    data: {
+      limit: "",
+      mrm: "",
+      business: ""
+    },
     errors: {}
   };
 
@@ -45,12 +50,26 @@ class RiskEntryForm extends Form {
     }
   };
 
+  doSubmit = () => {
+    console.log("submitted");
+  };
   render() {
     const { data } = this.state;
     return (
       <div>
-        <form onSubmit={this.handleChange}>
+        <div className="col-6 offset-3 risk-entry-information">
           {this.renderStaticRow("Description", data.description)}
+          {this.renderStaticRow("Type", data.type)}
+          {this.renderStaticRow(
+            "Utilsation",
+            <Utilisation utilisation={data.utilisation} breach={data.breach} />
+          )}
+          {this.renderStaticRow("Exposure", data.exposure)}
+        </div>
+        <form onSubmit={this.handleSubmit}>
+          {this.renderInput("limit", "Limit Value")}
+          {this.renderInput("mrm", "MRM Owner")}
+          {this.renderInput("business", "Business Owner")}
           {this.renderButton("Save")}
         </form>
       </div>

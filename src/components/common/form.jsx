@@ -46,7 +46,8 @@ class Form extends Component {
 
     const data = { ...this.state.data };
     data[input.name] = input.value;
-    this.setState(data);
+
+    this.setState({ data, errors });
   };
 
   renderButton = label => {
@@ -57,25 +58,26 @@ class Form extends Component {
     );
   };
 
-  renderInput = (name, label, type = "text") => {
+  renderInput(name, label, type = "text") {
     const { data, errors } = this.state;
+
     return (
       <Input
+        type={type}
+        name={name}
         value={data[name]}
         label={label}
-        name={name}
-        type={type}
         onChange={this.handleChange}
         error={errors[name]}
       />
     );
-  };
+  }
 
   renderStaticRow = (label, value) => {
     return (
-      <div className="form-group row">
-        <label className="col-2 col-form-label">{label}</label>
-        <label className="col-2 col-form-label">{value}</label>
+      <div className="row">
+        <label className="col-3">{label}</label>
+        <label className="col-3">{value}</label>
       </div>
     );
   };
