@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import _ from "lodash";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import limitService from "../../services/limitService";
 import TableSortable from "../common/tableSortable";
@@ -53,7 +54,13 @@ class RiskTable extends Component {
   }
 
   headers = [
-    { path: "description", label: "Description" },
+    {
+      path: "description",
+      label: "Description",
+      content: item => (
+        <Link to={`/risktable/${item._id}`}>{item.description}</Link>
+      )
+    },
     { path: "type", label: "Type" },
     {
       path: "utilisation",
