@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { toast } from "react-toastify";
 import utils from "../utils";
 
 class RiskDashboard extends Component {
