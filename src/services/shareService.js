@@ -90,7 +90,7 @@ class ShareLocalService {
   };
 
   removeStockListner = listener => {
-    this._listeners = this.listener.filter(item => item !== listener);
+    this._listeners = this._listeners.filter(item => item !== listener);
   };
 
   _updateStockPrice = (index, symbol, price) => {
