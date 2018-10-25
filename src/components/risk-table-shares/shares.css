@@ -17,6 +17,8 @@
 .shareName {
   font-size: 1.2em;
   color: var(--bootstrap-primary);
+  float: left;
+  margin-left: 20%;
 }
 
 .sharePrice {
