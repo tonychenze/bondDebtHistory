@@ -37,7 +37,12 @@ class Navigation extends Component {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
               <NavLink className="nav-link" to="/risktable">
-                Risk Table
+                FX
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/shares">
+                Shares
               </NavLink>
             </li>
             <li className="nav-item">

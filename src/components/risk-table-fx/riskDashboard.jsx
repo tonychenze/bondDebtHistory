@@ -26,22 +26,22 @@ class RiskDashboard extends Component {
     const { data } = this.props;
     return (
       <div className="row">
-        <div className="col-2" id="tableName">
-          <span>Risk Table</span>
+        <div className="col-lg-3" id="tableName">
+          <span>Risk Table - FX</span>
         </div>
-        <div className="col-2">
+        <div className="col-lg-2">
           <span className="dashboard-count" id="dashboard-total">
             {data.length}
           </span>
           <span className="dashboard-name">reocrds</span>
         </div>
-        <div className="col-2">
+        <div className="col-lg-2">
           <span className="dashboard-count" id="dashboard-nearBreach">
             {this.getNearBreachedCount()}
           </span>
           <span className="dashboard-name">near breach</span>
         </div>
-        <div className="col-2">
+        <div className="col-lg-2">
           <span className="dashboard-count" id="dashboard-breach">
             {this.getBreachedCount()}
           </span>

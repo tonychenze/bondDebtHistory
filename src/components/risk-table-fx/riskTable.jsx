@@ -61,7 +61,6 @@ class RiskTable extends Component {
         <Link to={`/risktable/${item._id}`}>{item.description}</Link>
       )
     },
-    { path: "type", label: "Type" },
     {
       path: "utilisation",
       label: "Utilisation",

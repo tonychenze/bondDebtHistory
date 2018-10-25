@@ -1,0 +1,35 @@
+:root {
+  --bootstrap-info: #5bc0de;
+  --bootstrap-primary: #0275d8;
+  --bootstrap-success: #5cb85c;
+  --bootstrap-warning: #f0ad4e;
+  --bootstrap-danger: #d9534f;
+  --bootstrap-faded: #f7f7f7;
+  --bootstrap-inverse: #292b2c;
+}
+
+.increasePrice {
+  color: var(--bootstrap-success);
+}
+.decreasePrice {
+  color: var(--bootstrap-danger);
+}
+.shareName {
+  font-size: 1.2em;
+  color: var(--bootstrap-primary);
+}
+
+.sharePrice {
+  font-size: 1.2em;
+  font-weight: 500;
+  padding-right: 2px;
+}
+.shareCurrency {
+  font-size: 0.8em;
+  font-weight: 500;
+  color: grey;
+}
+
+.fa {
+  font-weight: 200;
+}
