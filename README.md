@@ -5,6 +5,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ## Deployed To
 (https://radiant-ocean-71155.herokuapp.com)
+Refresh page is not supported in the heroku env due to React Routing halding the not found and Heroku's implmentation.
 ## Fake online service
 (https://my-json-server.typicode.com/tonychenze/fake_service)
 
