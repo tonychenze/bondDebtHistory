@@ -31,7 +31,7 @@ class ShareChange extends Component {
     const valueChange = Math.abs(share.price - share.closingPrice).toFixed(2);
     const percentChange = Math.abs(
       ((share.price - share.closingPrice) / share.closingPrice) * 100
-    ).toFixed(2);
+    ).toFixed(3);
     return (
       <React.Fragment>
         <span className={this.getChangeClassName()}>
