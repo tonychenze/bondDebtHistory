@@ -106,7 +106,7 @@ class ShareLocalService {
         const tick = Math.max(0.01, currentPrice * 0.05).toFixed(2);
         let nextPrice = currentPrice + (Math.random() * 2 - 1) * tick;
 
-        if (!nextPrice) nextPrice = currentPrice;
+        if (!nextPrice) return;
         this._updateStockPrice(
           index,
           share.symbol,

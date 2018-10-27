@@ -19,18 +19,15 @@ class Shares extends Component {
   componentDidMount() {
     this.shareService = new ShareLocalService();
     //get data from endpoint calling http service
-    this.state.stocks.forEach(stock => {
-      this.shareService.addStockListener(tick => this.handleTick(tick));
-    });
+    this.shareService.addStockListener(tick => this.handleTick(tick));
   }
 
   componentWillUnmount() {
-    this.state.stocks.forEach(stock => {
-      this.shareService.removeStockListner();
-    });
+    this.shareService.removeStockListner();
   }
 
   handleTick = tick => {
+    //getting tick:{ index, symbol, price }
     const changeStock = this.state.stocks.filter(
       stock => stock.symbol === tick.symbol
     );
