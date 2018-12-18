@@ -46,8 +46,18 @@ class Navigation extends Component {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/monitor">
-                Monitor
+              <NavLink className="nav-link" to="/debtByClass">
+                All Bond Types
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/bondLD">
+                LD
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/highChart">
+                High Charts
               </NavLink>
             </li>
           </ul>
