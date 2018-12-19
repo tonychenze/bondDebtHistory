@@ -21,7 +21,7 @@ class HighChart extends Component {
   getSeriesListData = (seriesList, targetList) => {
     return seriesList.map(item => {
       const targetValue = this.getValueList(targetList, item);
-      return { data: targetValue };
+      return { name: item, data: targetValue };
     });
   };
   getValueList = (list, value) => {
