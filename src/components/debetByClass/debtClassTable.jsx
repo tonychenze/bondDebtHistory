@@ -3,7 +3,8 @@ import _ from "lodash";
 import debtByClassService from "../../services/debtByClassService";
 import TableSortable from "../common/tableSortable";
 import { headers } from "./debtHeader";
-class debtClassTable extends Component {
+import getTypeFromRows from "./common/getTypesFromRows";
+class DebtClassTable extends Component {
   state = {
     currentSortColumn: { path: "instrument", order: "asc" },
     rows: [],
@@ -21,7 +22,9 @@ class debtClassTable extends Component {
   };
 
   renderButtons = () => {
-    const bondTypes = ["ALL", "BI", "LD", "ME", "MP", "SE", "SP"];
+    const bondTypesObj = getTypeFromRows(this.state.rows);
+    const bondTypesList = Object.getOwnPropertyNames(bondTypesObj);
+    const bondTypes = ["ALL", ...bondTypesList];
     return bondTypes.map(type => (
       <button
         className="btn btn-primary"
@@ -46,19 +49,41 @@ class debtClassTable extends Component {
       : rows.filter(row => row.instrument === currentType);
   };
 
-  render() {
-    const { currentSortColumn } = this.state;
+  stringToDate = maturityDate => {
+    const dateArray = maturityDate.toString().split("/");
+    return new Date(dateArray[2], dateArray[1], dateArray[0]);
+  };
 
+  getSortedByDate = rows => {
+    return rows.sort((a, b) => {
+      return this.stringToDate(a) > this.stringToDate(b) ? 1 : -1;
+    });
+  };
+  getSortedRows = () => {
+    const { currentSortColumn } = this.state;
     const renderRows = this.getRenderRows();
 
-    const sortedRows = _.orderBy(
-      renderRows,
-      [currentSortColumn.path],
-      [currentSortColumn.order]
-    );
+    const sortedRows =
+      currentSortColumn.path === "maturityDate"
+        ? this.getSortedByDate(renderRows)
+        : _.orderBy(
+            renderRows,
+            [currentSortColumn.path],
+            [currentSortColumn.order]
+          );
+
+    return sortedRows;
+  };
+
+  render() {
+    const { currentSortColumn, currentType } = this.state;
+    const sortedRows = this.getSortedRows();
 
     return (
       <div>
+        <h2>{`Historic Debt Outstanding - ${currentType} ${
+          sortedRows.length
+        } Items`}</h2>
         <div>{this.renderButtons()}</div>
         <div className="col-12">
           <TableSortable
@@ -73,4 +98,4 @@ class debtClassTable extends Component {
   }
 }
 
-export default debtClassTable;
+export default DebtClassTable;

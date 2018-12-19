@@ -5,7 +5,7 @@ import Navigation from "./components/navigation";
 import RiskTable from "./components/risk-table-fx/riskTable";
 import RiskEntryForm from "./components/risk-table-fx/riskEntryForm";
 import Monitor from "./components/monitor/monitor";
-import DebtByClass from "./components/debetByClass/debetByClass";
+import DebtClassTable from "./components/debetByClass/debtClassTable";
 import TotalByClassTable from "./components/debetByClass/TotalByClass/totalByClassTable";
 import HighChart from "./components/debetByClass/charts/highChart";
 import Shares from "./components/risk-table-shares/shares";
@@ -22,7 +22,7 @@ class App extends Component {
         <Switch>
           <Route path="/monitor" component={Monitor} />
           <Route path="/highChart" component={HighChart} />
-          <Route path="/debtByClass" component={DebtByClass} />
+          <Route path="/debtByClass" component={DebtClassTable} />
           <Route path="/bondLD" component={TotalByClassTable} />
           <Route path="/shares" component={Shares} />
           <Route path="/risktable/:id" component={RiskEntryForm} />
