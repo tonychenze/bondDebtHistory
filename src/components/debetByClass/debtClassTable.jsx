@@ -21,7 +21,7 @@ class debtClassTable extends Component {
   };
 
   renderButtons = () => {
-    const bondTypes = ["ALL", "LD", "ME", "MP", "SE", "SP"];
+    const bondTypes = ["ALL", "BI", "LD", "ME", "MP", "SE", "SP"];
     return bondTypes.map(type => (
       <button
         className="btn btn-primary"

@@ -52,7 +52,7 @@ class Navigation extends Component {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/bondLD">
-                LD
+                Total By Class
               </NavLink>
             </li>
             <li className="nav-item">

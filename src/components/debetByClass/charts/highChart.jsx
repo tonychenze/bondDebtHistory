@@ -6,7 +6,8 @@ class HighChart extends Component {
   state = {
     series1: [],
     series2: [],
-    series3: []
+    series3: [],
+    total: []
   };
   async componentDidMount() {
     const response = await debtByClassService.getBonds();
@@ -16,16 +17,20 @@ class HighChart extends Component {
       return this.stringToDate(a) > this.stringToDate(b) ? 1 : -1;
     });
 
-    const firstChart = ["A", "B", "C", "D", "E"];
-    const secondChart = ["F", "G", "H", "I", "II"];
-    const thridChart = ["Total"];
+    const firstChart = ["A", "B", "C", "D"];
+    const secondChart = ["E", "F", "G", "H"];
+    const thridChart = ["I", "II"];
+    const totalChart = ["Total"];
+
     const series1 = this.getSeriesListData(firstChart, sorted);
     const series2 = this.getSeriesListData(secondChart, sorted);
     const series3 = this.getSeriesListData(thridChart, sorted);
+    const total = this.getSeriesListData(totalChart, sorted);
     this.setState({
       series1,
       series2,
-      series3
+      series3,
+      total
     });
   }
 
@@ -45,24 +50,30 @@ class HighChart extends Component {
   };
   render() {
     const options1 = {
-      title: { text: "LD A-E" },
+      title: { text: "LD A-D" },
       series: this.state.series1
     };
 
     const options2 = {
-      title: { text: "LD F-II" },
+      title: { text: "LD E-H" },
       series: this.state.series2
+    };
+
+    const options3 = {
+      title: { text: "LD I and II" },
+      series: this.state.series3
     };
 
     const total = {
       title: { text: "LD-Total" },
-      series: this.state.series3
+      series: this.state.total
     };
 
     return (
       <div>
         <HighchartsReact highcharts={Highcharts} options={options1} />
         <HighchartsReact highcharts={Highcharts} options={options2} />
+        <HighchartsReact highcharts={Highcharts} options={options3} />
         <HighchartsReact highcharts={Highcharts} options={total} />
       </div>
     );
