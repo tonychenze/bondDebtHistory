@@ -4,6 +4,7 @@ import debtByClassService from "../../services/debtByClassService";
 import TableSortable from "../common/tableSortable";
 import { headers } from "./debtHeader";
 import getTypeFromRows from "./common/getTypesFromRows";
+import stringToDate from "./common/stringToDate";
 class DebtClassTable extends Component {
   state = {
     currentSortColumn: { path: "instrument", order: "asc" },
@@ -22,8 +23,7 @@ class DebtClassTable extends Component {
   };
 
   renderButtons = () => {
-    const bondTypesObj = getTypeFromRows(this.state.rows);
-    const bondTypesList = Object.getOwnPropertyNames(bondTypesObj);
+    const bondTypesList = getTypeFromRows(this.state.rows);
     const bondTypes = ["ALL", ...bondTypesList];
     return bondTypes.map(type => (
       <button
@@ -49,16 +49,12 @@ class DebtClassTable extends Component {
       : rows.filter(row => row.instrument === currentType);
   };
 
-  stringToDate = maturityDate => {
-    const dateArray = maturityDate.toString().split("/");
-    return new Date(dateArray[2], dateArray[1], dateArray[0]);
-  };
-
   getSortedByDate = rows => {
     return rows.sort((a, b) => {
-      return this.stringToDate(a) > this.stringToDate(b) ? 1 : -1;
+      return stringToDate(a) > stringToDate(b) ? 1 : -1;
     });
   };
+
   getSortedRows = () => {
     const { currentSortColumn } = this.state;
     const renderRows = this.getRenderRows();

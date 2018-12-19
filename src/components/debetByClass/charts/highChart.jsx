@@ -39,9 +39,7 @@ class HighChart extends Component {
     });
   };
   renderButtons = () => {
-    const bondTypesObj = getTypeFromRows(this.state.rows);
-    const bondTypes = Object.getOwnPropertyNames(bondTypesObj);
-
+    const bondTypes = getTypeFromRows(this.state.rows);
     return bondTypes.map(type => (
       <button
         className="btn btn-primary"

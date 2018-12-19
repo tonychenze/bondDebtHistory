@@ -60,6 +60,11 @@ class Navigation extends Component {
                 High Charts
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/stockChart">
+                Stock Charts
+              </NavLink>
+            </li>
           </ul>
         </div>
       </nav>

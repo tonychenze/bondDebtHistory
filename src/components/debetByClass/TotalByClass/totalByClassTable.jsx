@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import TotalByClassItem from "./totalByClassItem";
 import debtByClassService from "../../../services/debtByClassService";
+import getTypeFromRows from "../common/getTypesFromRows";
 import { headers } from "../debtHeader";
 class TotablByClassTable extends Component {
   state = {
-    tableData: [],
-    classes: ["BI", "LD", "ME", "MP", "SE", "SP"]
+    tableData: []
   };
+
   async componentDidMount() {
     const response = await debtByClassService.getBonds();
     const allRows = response ? response.data : [];
     if (!allRows) return;
 
     const newRows = [];
-    this.state.classes.forEach(type => {
+    const classes = getTypeFromRows(allRows);
+    classes.forEach(type => {
       const rows = allRows.filter(row => row.instrument === type);
       newRows.push({ type: type, data: rows });
     });
