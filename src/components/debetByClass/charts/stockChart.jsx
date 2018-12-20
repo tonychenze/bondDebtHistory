@@ -5,7 +5,8 @@ import getTypeFromRows from "../common/getTypesFromRows";
 import stringToDate from "../common/stringToDate";
 import { headers } from "../debtHeader";
 
-headers.splice(0, 2);
+const headersCopy = [...headers];
+headersCopy.splice(0, 2);
 class StockChart extends Component {
   state = {
     rows: [],
@@ -48,8 +49,7 @@ class StockChart extends Component {
   };
 
   renderPropetyButtonGroup = () => {
-    console.log(headers);
-    const filteredProps = headers.map(item => item.path);
+    const filteredProps = headersCopy.map(item => item.path);
     return filteredProps.map(property => (
       <button
         className="btn btn-success"
@@ -79,7 +79,9 @@ class StockChart extends Component {
     const { currentType, currentProperty } = this.state;
     const renderData = this.getRenderData();
     const sortedData = renderData.sort((a, b) => a[0] - b[0]);
-    const headerItem = headers.filter(item => item.path === currentProperty)[0];
+    const headerItem = headersCopy.filter(
+      item => item.path === currentProperty
+    )[0];
     const options = {
       title: {
         text: `Stock Chart of ${currentType} - ${headerItem.label}`

@@ -77,9 +77,11 @@ class DebtClassTable extends Component {
 
     return (
       <div>
-        <h2>{`Historic Debt Outstanding - ${currentType} ${
-          sortedRows.length
-        } Items`}</h2>
+        <h2>
+          <span>{`Historic Debt Outstanding - ${currentType} `}</span>
+          <span style={{ color: "	#5bc0de" }}>{`${sortedRows.length} `}</span>
+          <span>items</span>
+        </h2>
         <div>{this.renderButtons()}</div>
         <div className="col-12">
           <TableSortable
