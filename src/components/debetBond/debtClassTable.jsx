@@ -77,7 +77,7 @@ class DebtClassTable extends Component {
 
     return (
       <div>
-        <h2>
+        <h2 class="alert alert-info">
           <span>{`Historic Debt Outstanding - ${currentType} `}</span>
           <span style={{ color: "	#5bc0de" }}>{`${sortedRows.length} `}</span>
           <span>items</span>

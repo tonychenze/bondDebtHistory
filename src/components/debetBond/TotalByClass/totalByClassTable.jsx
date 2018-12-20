@@ -2,10 +2,17 @@ import React, { Component } from "react";
 import TotalByClassItem from "./totalByClassItem";
 import debtByClassService from "../../../services/debtByClassService";
 import getTypeFromRows from "../common/getTypesFromRows";
-import { headers } from "../debtHeader";
+import StockChart from "../charts/stockChart";
+import { headers, sectors, sectorDescriptons } from "../debtHeader";
+
+const headersCopy = [...headers];
+headersCopy.splice(0, 2);
+
 class TotablByClassTable extends Component {
   state = {
-    tableData: []
+    tableData: [],
+    currentType: "BI",
+    currentSector: "A"
   };
 
   async componentDidMount() {
@@ -21,14 +28,23 @@ class TotablByClassTable extends Component {
     });
     this.setState({ tableData: newRows });
   }
-  render() {
-    const { tableData } = this.state;
 
+  handleColumnClick = (currentType, currentSector) => {
+    this.setState({ currentType, currentSector });
+  };
+
+  getStokChartTitle = () => {
+    const { currentSector, currentType } = this.state;
+    return `Summary of ${currentType} - ${sectorDescriptons[currentSector]}`;
+  };
+
+  render() {
+    const { tableData, currentSector, currentType } = this.state;
     return (
       <div>
-        <h2>Total by Class </h2>
+        <h2 className="alert alert-info">Outstanding Debt History Summary</h2>
         <table className="table table-striped table-hover">
-          <thead>
+          <thead className="thead-dark">
             <tr>
               {headers.map(column => (
                 <th key={column.path}>{column.label}</th>
@@ -37,10 +53,27 @@ class TotablByClassTable extends Component {
           </thead>
           <tbody>
             {tableData.map((row, index) => (
-              <TotalByClassItem type={row.type} rows={row.data} key={index} />
+              <TotalByClassItem
+                type={row.type}
+                rows={row.data}
+                key={index}
+                onColumnClicked={this.handleColumnClick}
+                onRowColicked={this.handleRowClick}
+                atciveColumn={`${currentType}_${currentSector}`}
+              />
             ))}
           </tbody>
         </table>
+        <div>
+          <StockChart
+            sectors={sectors}
+            headers={headersCopy}
+            currentType={currentType}
+            currentSector={currentSector}
+            rows={tableData}
+            title={this.getStokChartTitle()}
+          />
+        </div>
       </div>
     );
   }

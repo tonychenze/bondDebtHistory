@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { sectors } from "../debtHeader";
 class TotalByClassItem extends Component {
   getTotal = column => {
     const { rows } = this.props;
@@ -6,27 +7,30 @@ class TotalByClassItem extends Component {
     return Math.round(resutlt * 100) / 100;
   };
 
-  render() {
-    const columns = [
-      "A",
-      "B",
-      "C",
-      "D",
-      "E",
-      "F",
-      "G",
-      "H",
-      "I",
-      "II",
-      "Total"
-    ];
+  sectorClick = (type, column) => {
+    this.props.onColumnClicked(type, column);
+  };
 
+  getClassName = (type, column) => {
+    const { atciveColumn } = this.props;
+    const currentColumn = `${type}_${column}`;
+    return atciveColumn === currentColumn ? "table-warning" : "";
+  };
+  render() {
+    const { type } = this.props;
+    const columns = sectors;
     return (
       <tr>
-        <td>{this.props.type}</td>
+        <td>{type}</td>
         <td>NA</td>
         {columns.map((column, index) => (
-          <td key={index}>{this.getTotal(column)}</td>
+          <td
+            key={index}
+            onClick={() => this.sectorClick(type, column)}
+            className={this.getClassName(type, column)}
+          >
+            {this.getTotal(column)}
+          </td>
         ))}
       </tr>
     );

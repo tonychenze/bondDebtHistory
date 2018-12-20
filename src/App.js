@@ -8,7 +8,6 @@ import Monitor from "./components/monitor/monitor";
 import DebtClassTable from "./components/debetBond/debtClassTable";
 import TotalByClassTable from "./components/debetBond/TotalByClass/totalByClassTable";
 import HighChart from "./components/debetBond/charts/highChart";
-import StockChart from "./components/debetBond/charts/stockChart";
 import Shares from "./components/risk-table-shares/shares";
 import NotFound from "./components/not-found/not-found";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,7 +23,6 @@ class App extends Component {
           <Route path="/monitor" component={Monitor} />
           <Route path="/debtByClass" component={DebtClassTable} />
           <Route path="/highChart" component={HighChart} />
-          <Route path="/stockChart" component={StockChart} />
           <Route path="/bondLD" component={TotalByClassTable} />
           <Route path="/shares" component={Shares} />
           <Route path="/risktable/:id" component={RiskEntryForm} />

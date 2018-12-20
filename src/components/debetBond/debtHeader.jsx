@@ -13,3 +13,30 @@ export const headers = [
   { path: "II", label: "Non Residents II" },
   { path: "Total", label: "Total" }
 ];
+
+export const sectorDescriptons = {
+  A: "Repos with Banxico 2 (A)",
+  B: "Guarantees Received by Banxico 3 (B)",
+  C: "Banking Sector 4 (C)",
+  D: "Securities Held by Banco de México 5(D)",
+  E: "Pension Funds (Siefores) (E)",
+  F: "Investment Funds (F)",
+  G: "Insurance and Surety Companies (G)",
+  H: "Other Residents (H)",
+  I: "Residents I",
+  II: "Non Residents II",
+  Total: "Total"
+};
+export const sectors = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "II",
+  "Total"
+];
