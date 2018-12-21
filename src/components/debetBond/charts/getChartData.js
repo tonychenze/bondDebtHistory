@@ -15,7 +15,7 @@ const getChartData = (list, path) => {
   const sortByDateList = Object.keys(reducedListObj)
     .sort((a, b) => a - b)
     .reduce((acc, cur) => {
-      acc.push([parseInt(cur), reducedListObj[cur]]);
+      acc.push([parseInt(cur), Math.floor(reducedListObj[cur] * 100) / 100]);
       return acc;
     }, []);
 
