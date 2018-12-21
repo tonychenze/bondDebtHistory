@@ -4,7 +4,7 @@ import debtByClassService from "../../services/debtByClassService";
 import TableSortable from "../common/tableSortable";
 import { headers } from "./debtHeader";
 import getTypeFromRows from "./common/getTypesFromRows";
-import stringToDate from "./common/stringToDate";
+import sortByDate from "./common/sortByDate";
 class DebtClassTable extends Component {
   state = {
     currentSortColumn: { path: "instrument", order: "asc" },
@@ -49,19 +49,13 @@ class DebtClassTable extends Component {
       : rows.filter(row => row.instrument === currentType);
   };
 
-  getSortedByDate = rows => {
-    return rows.sort((a, b) => {
-      return stringToDate(a) > stringToDate(b) ? 1 : -1;
-    });
-  };
-
   getSortedRows = () => {
     const { currentSortColumn } = this.state;
     const renderRows = this.getRenderRows();
 
     const sortedRows =
       currentSortColumn.path === "maturityDate"
-        ? this.getSortedByDate(renderRows)
+        ? renderRows.sort(sortByDate)
         : _.orderBy(
             renderRows,
             [currentSortColumn.path],
@@ -77,7 +71,7 @@ class DebtClassTable extends Component {
 
     return (
       <div>
-        <h2 class="alert alert-info">
+        <h2 className="alert alert-info">
           <span>{`Historic Debt Outstanding - ${currentType} `}</span>
           <span style={{ color: "	#5bc0de" }}>{`${sortedRows.length} `}</span>
           <span>items</span>

@@ -3,14 +3,10 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import debtByClassService from "../../../services/debtByClassService";
 import getTypeFromRows from "../common/getTypesFromRows";
-import stringToDate from "../common/stringToDate";
+import sortByDate from "../common/sortByDate";
 import { sectorDescriptons } from "../debtHeader";
 class HighChart extends Component {
   state = {
-    series1: [],
-    series2: [],
-    series3: [],
-    total: [],
     rows: [],
     currentType: "BI"
   };
@@ -21,7 +17,10 @@ class HighChart extends Component {
   }
 
   getValueList = (list, value) => {
-    return list.map(item => item[value]);
+    const sorted = list.sort(sortByDate);
+    return sorted.map(item => {
+      return [item[value]];
+    });
   };
 
   handleTypeClick = type => {
@@ -59,7 +58,6 @@ class HighChart extends Component {
     ];
 
     const series = groups.map(group => this.getSeriesListData(group, data));
-    console.log(series);
     return series.map((item, index) => (
       <HighchartsReact
         highcharts={Highcharts}
@@ -85,14 +83,10 @@ class HighChart extends Component {
       row => row.instrument === this.state.currentType
     );
 
-    const sorted = filtered.sort((a, b) => {
-      return stringToDate(a) > stringToDate(b) ? 1 : -1;
-    });
-
     return (
       <div>
         {this.renderButtons()}
-        {this.renderCharts(sorted)}
+        {this.renderCharts(filtered)}
       </div>
     );
   }

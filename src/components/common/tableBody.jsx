@@ -16,11 +16,11 @@ class TableBody extends Component {
     return <td key={cellKey}>{_.get(row, column.path)}</td>;
   };
   render() {
-    const { columns, rows, rowIdVal } = this.props;
+    const { columns, rows } = this.props;
     return (
       <tbody>
-        {rows.map(row => (
-          <tr key={row[rowIdVal]}>
+        {rows.map((row, index) => (
+          <tr key={index}>
             {columns.map(column => this.renderCell(row, column))}
           </tr>
         ))}
