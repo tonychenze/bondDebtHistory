@@ -3,7 +3,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import debtByClassService from "../../../services/debtByClassService";
 import getTypeFromRows from "../common/getTypesFromRows";
-import stringToDate from "../common/stringToDate";
+import getChartData from "./getChartData";
 import { sectorDescriptons } from "../debtHeader";
 class HighChart extends Component {
   state = {
@@ -15,29 +15,6 @@ class HighChart extends Component {
     const rows = response ? response.data : [];
     this.setState({ rows });
   }
-
-  getChartData = (list, type) => {
-    //{dateInt : value }
-    //{1538262000000: 50612.47}
-    const reducedListObj = list.reduce((acc, cur) => {
-      const dateInt = stringToDate(cur.maturityDate).getTime();
-      if (acc[dateInt]) {
-        acc[dateInt] += cur[type];
-      } else {
-        acc[dateInt] = cur[type];
-      }
-      return acc;
-    }, {});
-
-    const sortByDateList = Object.keys(reducedListObj)
-      .sort((a, b) => a - b)
-      .reduce((acc, cur) => {
-        acc.push([parseInt(cur), reducedListObj[cur]]);
-        return acc;
-      }, []);
-
-    return sortByDateList;
-  };
 
   handleTypeClick = type => {
     this.setState({
@@ -95,7 +72,7 @@ class HighChart extends Component {
 
   getSeriesGroupData = (seriesList, targetList) => {
     return seriesList.map(item => {
-      const targetValue = this.getChartData(targetList, item);
+      const targetValue = getChartData(targetList, item);
       return { name: sectorDescriptons[item], data: targetValue };
     });
   };

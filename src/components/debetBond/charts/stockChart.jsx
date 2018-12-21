@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import StockChartItem from "./stockChartItem";
 import debtByClassService from "../../../services/debtByClassService";
-import stringToDate from "../common/stringToDate";
+import getChartData from "./getChartData";
 
 class StockChart extends Component {
   state = {
@@ -18,13 +18,7 @@ class StockChart extends Component {
     const { rows } = this.state;
     const { currentSector, currentType } = this.props;
     const filteredRows = rows.filter(item => item.instrument === currentType);
-    const renderData = filteredRows.reduce((acc, cur) => {
-      const timeInInt = stringToDate(cur.maturityDate).getTime();
-      acc.push([timeInInt, cur[currentSector]]);
-      return acc;
-    }, []);
-
-    return renderData;
+    return getChartData(filteredRows, currentSector);
   };
 
   render() {
