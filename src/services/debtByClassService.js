@@ -1,8 +1,12 @@
 import http from "./httpService";
-const apiURL = "http://localhost:3500/api";
+//const apiURL = "http://localhost:3500/api";
 
 function getBonds() {
-  return http.get(apiURL + "/bonditems");
+  //calling local service
+  //return http.get(apiURL+ "/bonditems");
+
+  //return mock data from the local
+  return http.get("bondItemsMock.json");
 }
 
 export default {
