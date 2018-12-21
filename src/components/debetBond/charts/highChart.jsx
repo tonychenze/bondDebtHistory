@@ -3,7 +3,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import debtByClassService from "../../../services/debtByClassService";
 import getTypeFromRows from "../common/getTypesFromRows";
-import sortByDate from "../common/sortByDate";
+import stringToDate from "../common/stringToDate";
 import { sectorDescriptons } from "../debtHeader";
 class HighChart extends Component {
   state = {
@@ -16,11 +16,27 @@ class HighChart extends Component {
     this.setState({ rows });
   }
 
-  getValueList = (list, value) => {
-    const sorted = list.sort(sortByDate);
-    return sorted.map(item => {
-      return [item[value]];
-    });
+  getChartData = (list, type) => {
+    //{dateInt : value }
+    //{1538262000000: 50612.47}
+    const reducedListObj = list.reduce((acc, cur) => {
+      const dateInt = stringToDate(cur.maturityDate).getTime();
+      if (acc[dateInt]) {
+        acc[dateInt] += cur[type];
+      } else {
+        acc[dateInt] = cur[type];
+      }
+      return acc;
+    }, {});
+
+    const sortByDateList = Object.keys(reducedListObj)
+      .sort((a, b) => a - b)
+      .reduce((acc, cur) => {
+        acc.push([parseInt(cur), reducedListObj[cur]]);
+        return acc;
+      }, []);
+
+    return sortByDateList;
   };
 
   handleTypeClick = type => {
@@ -57,22 +73,29 @@ class HighChart extends Component {
       ["Total"]
     ];
 
-    const series = groups.map(group => this.getSeriesListData(group, data));
-    return series.map((item, index) => (
+    const series = groups.map(group => this.getSeriesGroupData(group, data));
+    const sortedSeries = series.map(item => item.sort((a, b) => a[0] - b[0]));
+    return sortedSeries.map((item, index) => (
       <HighchartsReact
         highcharts={Highcharts}
         key={index}
         options={{
           title: { text: `${currentType} - Part ${index + 1}` },
-          series: item
+          series: item,
+          xAxis: {
+            type: "datetime",
+            labels: {
+              format: "{value:%Y-%b-%e}"
+            }
+          }
         }}
       />
     ));
   };
 
-  getSeriesListData = (seriesList, targetList) => {
+  getSeriesGroupData = (seriesList, targetList) => {
     return seriesList.map(item => {
-      const targetValue = this.getValueList(targetList, item);
+      const targetValue = this.getChartData(targetList, item);
       return { name: sectorDescriptons[item], data: targetValue };
     });
   };
