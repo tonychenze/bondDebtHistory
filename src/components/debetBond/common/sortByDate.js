@@ -1,7 +1,10 @@
 import stringToDate from "./stringToDate";
 
-const sortByDate =(a, b) => {
-    return stringToDate(a) > stringToDate(b) ? 1 : -1;
+const asc = (a, b) => {
+  return stringToDate(a) > stringToDate(b) ? 1 : -1;
+};
+const desc = (a, b) => {
+  return stringToDate(a) > stringToDate(b) ? -1 : 1;
 };
 
-export default sortByDate;
+export default { asc, desc };

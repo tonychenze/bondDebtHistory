@@ -45,7 +45,7 @@ class DebtClassTable extends Component {
   getRenderRows = () => {
     const { rows, currentType } = this.state;
     return currentType === "ALL"
-      ? rows
+      ? [...rows]
       : rows.filter(row => row.instrument === currentType);
   };
 
@@ -55,7 +55,9 @@ class DebtClassTable extends Component {
 
     const sortedRows =
       currentSortColumn.path === "maturityDate"
-        ? renderRows.sort(sortByDate)
+        ? renderRows.sort(
+            currentSortColumn.order === "asc" ? sortByDate.desc : sortByDate.asc
+          )
         : _.orderBy(
             renderRows,
             [currentSortColumn.path],
