@@ -33,7 +33,7 @@ class RiskDashboard extends Component {
           <span className="dashboard-count" id="dashboard-total">
             {data.length}
           </span>
-          <span className="dashboard-name">reocrds</span>
+          <span className="dashboard-name">records</span>
         </div>
         <div className="col-lg-2">
           <span className="dashboard-count" id="dashboard-nearBreach">

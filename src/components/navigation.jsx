@@ -36,13 +36,8 @@ class Navigation extends Component {
         <div className={`${classOne}`} id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/risktable">
-                FX
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/shares">
-                Shares
+              <NavLink className="nav-link" to="/bondSummary">
+                Historical Summary
               </NavLink>
             </li>
             <li className="nav-item">
@@ -50,14 +45,20 @@ class Navigation extends Component {
                 All Bond Types
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/bondLD">
-                Total By Class
-              </NavLink>
-            </li>
+
             <li className="nav-item">
               <NavLink className="nav-link" to="/highChart">
                 High Charts
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/risktable">
+                FX
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/shares">
+                Shares
               </NavLink>
             </li>
           </ul>

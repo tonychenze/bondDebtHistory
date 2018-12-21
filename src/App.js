@@ -23,12 +23,12 @@ class App extends Component {
           <Route path="/monitor" component={Monitor} />
           <Route path="/debtByClass" component={DebtClassTable} />
           <Route path="/highChart" component={HighChart} />
-          <Route path="/bondLD" component={TotalByClassTable} />
+          <Route path="/bondSummary" component={TotalByClassTable} />
           <Route path="/shares" component={Shares} />
           <Route path="/risktable/:id" component={RiskEntryForm} />
           <Route path="/risktable" component={RiskTable} />
           <Route path="/not-found" component={NotFound} />
-          <Redirect from="/" exact to="/risktable" />
+          <Redirect from="/" exact to="/bondSummary" />
           <Redirect to="/not-found" />
         </Switch>
       </div>

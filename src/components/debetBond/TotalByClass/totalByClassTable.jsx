@@ -42,7 +42,7 @@ class TotablByClassTable extends Component {
     const { tableData, currentSector, currentType } = this.state;
     return (
       <div>
-        <h2 className="alert alert-info">Outstanding Debt History Summary</h2>
+        <h2 className="alert alert-info">Historic Debt Outstanding Summary</h2>
         <table className="table table-striped table-hover">
           <thead className="thead-dark">
             <tr>
