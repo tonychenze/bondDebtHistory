@@ -4,8 +4,7 @@ Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## Deployed To
-(https://radiant-ocean-71155.herokuapp.com)
-Refresh page is not supported in the heroku env due to React Routing halding the not found and Heroku's implmentation.
+(https://salty-cliffs-43556.herokuapp.com/)
 ## Fake online service
 (https://my-json-server.typicode.com/tonychenze/fake_service)
 
