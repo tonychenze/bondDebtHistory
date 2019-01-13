@@ -1,10 +1,19 @@
 import React, { Component } from "react";
 import { sectors } from "../debtHeader";
+import NumberFormat from "react-number-format";
+
 class TotalByClassItem extends Component {
   getTotal = column => {
     const { rows } = this.props;
     const resutlt = rows ? rows.reduce((acc, cur) => acc + cur[column], 0) : 0;
-    return Math.round(resutlt * 100) / 100;
+    const rounded = Math.round(resutlt * 100) / 100;
+    return (
+      <NumberFormat
+        value={rounded}
+        displayType={"text"}
+        thousandSeparator={true}
+      />
+    );
   };
 
   sectorClick = (type, column) => {
