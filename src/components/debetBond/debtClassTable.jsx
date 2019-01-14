@@ -1,10 +1,13 @@
-import React, { Component } from "react";
 import _ from "lodash";
+import React, { Component } from "react";
+import NumberFormat from "react-number-format";
 import debtByClassService from "../../services/debtByClassService";
+
 import TableSortable from "../common/tableSortable";
-import { headers } from "./debtHeader";
 import getTypeFromRows from "./common/getTypesFromRows";
 import sortByDate from "./common/sortByDate";
+import { headers, sectors } from "./debtHeader";
+
 class DebtClassTable extends Component {
   state = {
     currentSortColumn: { path: "instrument", order: "asc" },
@@ -70,7 +73,26 @@ class DebtClassTable extends Component {
   render() {
     const { currentSortColumn, currentType } = this.state;
     const sortedRows = this.getSortedRows();
+    const renderHeader = headers.map(item => {
+      let headerItem =
+        sectors.indexOf(item.path) !== -1
+          ? {
+              path: item.path,
+              label: item.label,
+              content: sector => (
+                <NumberFormat
+                  value={sector[item.path]}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                />
+              )
+            }
+          : { path: item.path, label: item.label };
 
+      return headerItem;
+    });
+
+    console.log(renderHeader);
     return (
       <div>
         <h2 className="alert alert-info">
@@ -81,7 +103,7 @@ class DebtClassTable extends Component {
         <div>{this.renderButtons()}</div>
         <div className="col-12">
           <TableSortable
-            columns={headers}
+            columns={renderHeader}
             rows={sortedRows}
             onSort={this.handleSort}
             sortColumn={currentSortColumn}
