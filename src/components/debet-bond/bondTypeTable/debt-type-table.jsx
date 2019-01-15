@@ -6,7 +6,7 @@ import Spinner from "../../common/spinner";
 import TableSortable from "../../common/tableSortable";
 import getTypeFromRows from "../common/getTypesFromRows";
 import sortByDate from "../common/sortByDate";
-import { headers, sectors } from "./debtHeader";
+import { headers, sectors } from "./header-constants";
 
 class DebtClassTable extends Component {
   state = {

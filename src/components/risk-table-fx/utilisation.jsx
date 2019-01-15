@@ -1,5 +1,5 @@
 import React from "react";
-import utils from "../utils";
+import utils from "./utils";
 import "./riskTable.css";
 
 const Utilisation = ({ utilisation, breach }) => {

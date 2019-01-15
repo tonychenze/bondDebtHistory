@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TotalByClassItem from "./totalByClassItem";
+import TotalByClassItem from "./summaryRow";
 import debtByClassService from "../../../services/debtByClassService";
 import getTypeFromRows from "../common/getTypesFromRows";
 import StockChart from "../charts/stockChart";

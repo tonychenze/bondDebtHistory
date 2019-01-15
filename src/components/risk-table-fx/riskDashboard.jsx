@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import utils from "../utils";
+import utils from "./utils";
 
 class RiskDashboard extends Component {
   getBreachedCount = () => {
