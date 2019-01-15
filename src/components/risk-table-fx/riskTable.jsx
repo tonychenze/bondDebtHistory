@@ -18,48 +18,13 @@ class RiskTable extends Component {
   async componentDidMount() {
     //get data from endpoint calling http service
     const { data: rows } = await limitService.getLimits();
-    // const rows = [
-    //   {
-    //     _id: "1",
-    //     description: "USD-GBP",
-    //     type: "FX",
-    //     utilisation: 110,
-    //     exposure: 11,
-    //     limit: 10,
-    //     mrm: "MRM Onwer 1",
-    //     business: "business owner",
-    //     supervisor: "supervisor ",
-    //     tick: 0.5,
-    //     breach: 1.2,
-    //     currency: "$",
-    //     unit: "M"
-    //   },
-    //   {
-    //     _id: "2",
-    //     description: "GBP-EUR",
-    //     type: "FX",
-    //     utilisation: 35,
-    //     exposure: 7,
-    //     limit: 20,
-    //     mrm: "MRM Onwer 2",
-    //     business: "business owner 3",
-    //     supervisor: "supervisor 4 ",
-    //     tick: 1,
-    //     breach: 1.5,
-    //     currency: "€",
-    //     unit: "M"
-    //   }
-    //];
     this.setState({ rows });
   }
 
   headers = [
     {
       path: "description",
-      label: "Description",
-      content: item => (
-        <Link to={`/risktable/${item._id}`}>{item.description}</Link>
-      )
+      label: "Description"
     },
     {
       path: "utilisation",
