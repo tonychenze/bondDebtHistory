@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import limitService from "../../services/limitService";
 import TableSortable from "../common/tableSortable";
@@ -103,10 +102,6 @@ class RiskTable extends Component {
 
     newItem.utilisation = ((newItem.exposure * 100) / newItem.limit).toFixed(0);
     this.setState({ rows });
-  };
-
-  handleSellItem = item => {
-    console.log("handle a sell of", item);
   };
 
   render() {

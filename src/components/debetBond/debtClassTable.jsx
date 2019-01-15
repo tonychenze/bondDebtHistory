@@ -2,7 +2,7 @@ import _ from "lodash";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
 import debtByClassService from "../../services/debtByClassService";
-
+import Spinner from "../common/spinner";
 import TableSortable from "../common/tableSortable";
 import getTypeFromRows from "./common/getTypesFromRows";
 import sortByDate from "./common/sortByDate";
@@ -70,10 +70,8 @@ class DebtClassTable extends Component {
     return sortedRows;
   };
 
-  render() {
-    const { currentSortColumn, currentType } = this.state;
-    const sortedRows = this.getSortedRows();
-    const renderHeader = headers.map(item => {
+  getRenderHeader = () => {
+    return headers.map(item => {
       let headerItem =
         sectors.indexOf(item.path) !== -1
           ? {
@@ -91,15 +89,14 @@ class DebtClassTable extends Component {
 
       return headerItem;
     });
-
-    console.log(renderHeader);
+  };
+  
+  renderBodyContent = sortedRows => {
+    const { currentSortColumn } = this.state;
+    const renderHeader = this.getRenderHeader();
+    if (!sortedRows || sortedRows.length === 0) return <Spinner />;
     return (
-      <div>
-        <h2 className="alert alert-info">
-          <span>{`Historic Debt Outstanding - ${currentType} `}</span>
-          <span style={{ color: "	#5bc0de" }}>{`${sortedRows.length} `}</span>
-          <span>items</span>
-        </h2>
+      <React.Fragment>
         <div>{this.renderButtons()}</div>
         <div className="col-12">
           <TableSortable
@@ -109,6 +106,28 @@ class DebtClassTable extends Component {
             sortColumn={currentSortColumn}
           />
         </div>
+      </React.Fragment>
+    );
+  };
+
+  renderTitleContent = sortedRows => {
+    const { currentType } = this.state;
+    return (
+      <h2 className="alert alert-info">
+        <span>{`Historic Debt Outstanding - ${currentType} `}</span>
+        <span style={{ color: "	#5bc0de" }}>{`${sortedRows.length} `}</span>
+        <span>items</span>
+      </h2>
+    );
+  };
+
+  render() {
+    const sortedRows = this.getSortedRows();
+
+    return (
+      <div>
+        {this.renderTitleContent(sortedRows)}
+        {this.renderBodyContent(sortedRows)}
       </div>
     );
   }

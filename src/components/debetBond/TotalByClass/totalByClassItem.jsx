@@ -25,13 +25,14 @@ class TotalByClassItem extends Component {
     const currentColumn = `${type}_${column}`;
     return atciveColumn === currentColumn ? "table-warning" : "";
   };
+
   render() {
     const { type } = this.props;
     const columns = sectors;
     return (
       <tr>
         <td>{type}</td>
-        <td>NA</td>
+        <td>N/A</td>
         {columns.map((column, index) => (
           <td
             key={index}
