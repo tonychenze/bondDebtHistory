@@ -1,11 +1,11 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import NumberFormat from "react-number-format";
-import debtByClassService from "../../services/debtByClassService";
-import Spinner from "../common/spinner";
-import TableSortable from "../common/tableSortable";
-import getTypeFromRows from "./common/getTypesFromRows";
-import sortByDate from "./common/sortByDate";
+import debtByClassService from "../../../services/debtByClassService";
+import Spinner from "../../common/spinner";
+import TableSortable from "../../common/tableSortable";
+import getTypeFromRows from "../common/getTypesFromRows";
+import sortByDate from "../common/sortByDate";
 import { headers, sectors } from "./debtHeader";
 
 class DebtClassTable extends Component {

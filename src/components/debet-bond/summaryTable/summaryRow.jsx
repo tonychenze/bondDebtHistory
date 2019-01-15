@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { sectors } from "../debtHeader";
+import { sectors } from "../bondTypeTable/header-constants";
 import NumberFormat from "react-number-format";
 
 class TotalByClassItem extends Component {

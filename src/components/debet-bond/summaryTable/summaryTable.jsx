@@ -3,7 +3,7 @@ import TotalByClassItem from "./totalByClassItem";
 import debtByClassService from "../../../services/debtByClassService";
 import getTypeFromRows from "../common/getTypesFromRows";
 import StockChart from "../charts/stockChart";
-import { headers, sectors, sectorDescriptons } from "../debtHeader";
+import { headers, sectors, sectorDescriptons } from "../bondTypeTable/header-constants";
 
 const headersCopy = [...headers];
 headersCopy.splice(0, 2);

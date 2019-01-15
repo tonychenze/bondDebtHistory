@@ -4,7 +4,7 @@ import HighchartsReact from "highcharts-react-official";
 import debtByClassService from "../../../services/debtByClassService";
 import getTypeFromRows from "../common/getTypesFromRows";
 import getChartData from "./getChartData";
-import { sectorDescriptons } from "../debtHeader";
+import { sectorDescriptons } from "../bondTypeTable/debtHeader";
 class HighChart extends Component {
   state = {
     rows: [],
