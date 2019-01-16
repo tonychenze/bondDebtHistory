@@ -7,7 +7,7 @@ axios.interceptors.response.use(null, error => {
     error.response.status >= 400 &&
     error.response.status < 500;
   if (!expectedError) {
-    toast.error("Unexpected Error Occured");
+    toast.error("Unexpected Error Occured - Server is down");
     logger.log(error);
   }
 });
