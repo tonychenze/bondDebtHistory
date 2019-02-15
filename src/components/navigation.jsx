@@ -61,6 +61,11 @@ class Navigation extends Component {
                 Shares
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/compensation">
+                compensation
+              </NavLink>
+            </li>
           </ul>
         </div>
       </nav>
