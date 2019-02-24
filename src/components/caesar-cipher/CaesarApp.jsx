@@ -30,6 +30,8 @@ class CaesarApp extends Component {
         if (code >= 65 && code <= 90)
           output += String.fromCharCode(((code - 65 + shiftNum) % 26) + 65);
         else output += String.fromCharCode(((code - 97 + shiftNum) % 26) + 97);
+      } else if (char == " " || char == "\t" || char == "\n") {
+        output += " ";
       }
     }
 
@@ -49,7 +51,7 @@ class CaesarApp extends Component {
   };
 
   handleShiftChange = shift => {
-    this.setState({ shift });
+    this.setState({ shift, plainText: "", cipherText: "" });
   };
 
   handlePlainChange = plainText => {
