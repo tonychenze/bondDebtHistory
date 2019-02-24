@@ -27,3 +27,8 @@ class Plaintext extends Component {
 }
 
 export default Plaintext;
+
+Plaintext.propTypes = {
+  handlePlainTextChange: PropTypes.func.isRequired,
+  plainText: PropTypes.string.isRequired
+};

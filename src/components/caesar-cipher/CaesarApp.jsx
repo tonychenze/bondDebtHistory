@@ -17,6 +17,7 @@ class CaesarApp extends Component {
   convertText = (textArr, shift) => {
     if (shift === "" || shift === undefined) return textArr.join("");
     const shiftNum = parseInt(shift);
+
     if (shiftNum < 0) {
       return this.convertText(textArr, shiftNum + charCounts);
     }
@@ -30,7 +31,7 @@ class CaesarApp extends Component {
         if (code >= 65 && code <= 90)
           output += String.fromCharCode(((code - 65 + shiftNum) % 26) + 65);
         else output += String.fromCharCode(((code - 97 + shiftNum) % 26) + 97);
-      } else if (char == " " || char == "\t" || char == "\n") {
+      } else if (char === " " || char === "\t" || char === "\n") {
         output += " ";
       }
     }

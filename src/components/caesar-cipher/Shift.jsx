@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import { Menu } from "@material-ui/core";
 const range = 26;
 let options = [];
 
@@ -45,3 +44,8 @@ class Shift extends Component {
 }
 
 export default Shift;
+
+Shift.propTypes = {
+  handleShiftChange: PropTypes.func.isRequired,
+  shiftValue: PropTypes.string.isRequired
+};

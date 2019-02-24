@@ -27,3 +27,8 @@ class Ciphertext extends Component {
 }
 
 export default Ciphertext;
+
+Ciphertext.propTypes = {
+  handleCipherTextChange: PropTypes.func.isRequired,
+  cipherText: PropTypes.string.isRequired
+};
