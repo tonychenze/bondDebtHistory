@@ -66,6 +66,11 @@ class Navigation extends Component {
                 compensation
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/caesarapp">
+                Caesar
+              </NavLink>
+            </li>
           </ul>
         </div>
       </nav>

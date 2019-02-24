@@ -11,6 +11,7 @@ import HighChart from "./components/debet-bond/charts/highChart";
 import Shares from "./components/risk-table-shares/shares";
 import Componsation from "./components/componsation/componsation";
 import NotFound from "./components/not-found/not-found";
+import CaesarApp from "./components/caesar-cipher/CaesarApp";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -29,6 +30,7 @@ class App extends Component {
           <Route path="/risktable/:id" component={RiskEntryForm} />
           <Route path="/risktable" component={RiskTable} />
           <Route path="/compensation" component={Componsation} />
+          <Route path="/caesarapp" component={CaesarApp} />
           <Route path="/not-found" component={NotFound} />
           <Redirect from="/" exact to="/bondSummary" />
           <Redirect to="/not-found" />

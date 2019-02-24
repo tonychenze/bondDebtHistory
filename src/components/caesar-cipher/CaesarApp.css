@@ -1,0 +1,9 @@
+.shift {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.MuiPaper-root-51 {
+  display: flex;
+  justify-content: space-around;
+}
