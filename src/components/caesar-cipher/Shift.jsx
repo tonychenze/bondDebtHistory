@@ -46,6 +46,6 @@ class Shift extends Component {
 export default Shift;
 
 Shift.propTypes = {
-  handleShiftChange: PropTypes.func.isRequired,
-  shiftValue: PropTypes.string.isRequired
+  shiftValue: PropTypes.string.isRequired,
+  handleShiftChange: PropTypes.func.isRequired
 };
